@@ -1,0 +1,29 @@
+services: 
+    api:
+        build: .
+        container_name: microservice-reserva
+        ports: 
+            - "8090:80"
+        environment:
+            SERVER: "sqlServer"
+            PORT: 1433
+            DATABASE: "MicroServiceReserva"
+            USERNAME: "sa"
+            PASSWORD: "P@ssw0rd"
+            INTEGRATED_SECURITY: "false"
+        depends_on:
+            - database
+    database:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        container_name: "sqlServer"
+        hostname: "sqlServer"
+        ports:
+          - 1433:1433
+        environment:
+            SA_PASSWORD: "P@ssw0rd"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Express"
+        volumes:
+            - sqlserver-data:/var/opt/mssql
+volumes:
+  sqlserver-data:

@@ -1,0 +1,8 @@
+root = true
+
+[*.cs]
+indent_style = tab
+tab_size = 4
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = error
